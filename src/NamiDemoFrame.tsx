@@ -2,7 +2,7 @@ import { styled } from '@linaria/react';
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 
-type DemoId = 'orders' | 'telegram' | 'automation';
+type DemoId = 'orders';
 
 interface FrameOptions {
   filename: string;
@@ -20,20 +20,7 @@ const DEMOS: Record<DemoId, FrameOptions> = {
     minimumHeight: 100,
     eventType: 'nami-preview-height',
   },
-  telegram: {
-    filename: 'telegram.html',
-    title: 'NAMI — управление заказами через Telegram',
-    initialHeight: 1400,
-    minimumHeight: 500,
-    eventType: 'telegram-height',
-  },
-  automation: {
-    filename: 'automation.html',
-    title: 'NAMI — автоматическая обработка писем',
-    initialHeight: 850,
-    minimumHeight: 400,
-    eventType: 'automation-height',
-  },
+
 };
 
 const Frame = styled.iframe`
@@ -45,7 +32,7 @@ const Frame = styled.iframe`
 `;
 
 export interface NamiWidgetProps {
-  /** URL prefix containing the three original demo HTML files. */
+  /** URL prefix containing the orders demo HTML file. */
   assetBasePath?: string;
   className?: string;
   style?: CSSProperties;
@@ -151,10 +138,3 @@ export function OrdersWidget(props: NamiWidgetProps) {
   return <NamiDemoFrame demo="orders" {...props} />;
 }
 
-export function TelegramWidget(props: NamiWidgetProps) {
-  return <NamiDemoFrame demo="telegram" {...props} />;
-}
-
-export function MailAutomationWidget(props: NamiWidgetProps) {
-  return <NamiDemoFrame demo="automation" {...props} />;
-}

@@ -1,0 +1,105 @@
+import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
+import type { ContentProps } from "../shared/WidgetParts";
+
+export function AutomationWarehouseNotificationContent({
+  assetBasePath,
+}: ContentProps) {
+  return (
+    <div className="window telegram">
+      <ChatHeader
+        avatar="N"
+        title="AI-помощник NAMI"
+        subtitle="бот"
+        agent={true}
+      />
+      <div className="chat-body" tabIndex={0} aria-label="История сообщений">
+        <span className="date-pill">{"Сегодня"}</span>
+        <span className="auto-pill">{"Автоматическое уведомление"}</span>
+        <div className="message incoming bot-unified standard-client-card">
+          <div className="tg-person" style={{ marginTop: "0" }}>
+            {"👤 "}
+            <a href="https://t.me/nami_demo_sofia">{"София Соколова"}</a>
+            {" · Telegram"}
+          </div>
+          <div className="tg-section">
+            <b>{"📋 Информация"}</b>
+            <div className="tg-tree" style={{ marginTop: "9px" }}>
+              <div className="tg-stage">
+                <span className="tg-label">{"├ Этап"}</span>
+                <span style={{ color: "#111", fontWeight: "400" }}>
+                  {"На складе в Японии"}
+                </span>
+              </div>
+              <div>
+                <span className="tg-label">{"├ Трек"}</span>
+                <span>
+                  <span style={{ color: "#111", fontWeight: "700" }}>
+                    {"DEMO-JAPAN-101"}
+                  </span>
+                </span>
+              </div>
+              <div
+                className="tg-comment"
+                style={{
+                  display: "block",
+                  position: "relative",
+                  paddingLeft: "12px",
+                  gridTemplateColumns: "none",
+                  whiteSpace: "normal",
+                  overflowWrap: "break-word",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    left: "0",
+                    top: "0",
+                    color: "#2877ac",
+                  }}
+                >
+                  {"└"}
+                </span>
+                <span
+                  className="tg-label"
+                  style={{ display: "inline", whiteSpace: "normal" }}
+                >
+                  {"Комментарий"}
+                </span>
+                <span
+                  style={{
+                    display: "inline",
+                    fontWeight: "400",
+                    whiteSpace: "normal",
+                    overflowWrap: "break-word",
+                  }}
+                >
+                  {"Проверьте упаковку перед отправкой."}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="tg-section">
+            <b>{"🛍️ Товары"}</b>
+            <div className="tg-product">
+              {"1. Women's Linen Shirt, Size M — "}
+              <b>{"1 шт."}</b>
+              <div className="tg-branch">
+                {"├ "}
+                <a href="https://example.invalid/products/shirt">
+                  {"https://example.invalid/products/shirt"}
+                </a>
+              </div>
+              <div className="tg-branch">
+                {"└ "}
+                <b>{"11 590 ₽"}</b>
+              </div>
+            </div>
+          </div>
+          <span className="time">{"12:41"}</span>
+        </div>
+      </div>
+      <Composer />
+    </div>
+  );
+}
