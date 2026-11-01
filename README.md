@@ -1,68 +1,58 @@
 # AGICODE — NAMI Case Widgets
 
-Minimal React component package for interactive NAMI case widgets used **only on agicode.ru**.
+**Three interactive demos extracted from the supplied NAMI case HTML:**
 
-**Stack:** React 19, TypeScript, Linaria (`@wyw-in-js/vite`), Vite 8, Storybook 10.
+1. `OrdersWidget` — NAMI order-management interface (create orders, add clients, merge parcels).
+2. `TelegramWidget` — four scenarios: create order, read a document/photo, check shipping status, merge parcels.
+3. `MailAutomationWidget` — three email-driven automation scenarios.
 
-## Requirements
+The supplied case contained **self-contained, already-built HTML/JS demos**, not reusable React/TypeScript source code. To keep the original visual appearance, data, interactivity and navigation without guessing how the original apps worked, the HTML demos are preserved **byte-for-byte** under `public/nami-widgets/`. The React/TypeScript/Linaria components are lightweight, sandboxed iframe adapters. This is a faithful extraction, **not a native TSX rewrite** of the original applications.
 
-- Node.js 22.12+
-- npm
+No actual NAMI back end, customer data or external API credentials are included; the source demos are illustrative. We did not add network access to them.
 
-## Getting started
+## Local Storybook
+
+Requires Node.js 22.12+ and npm.
 
 ```bash
 npm install
 npm run storybook
 ```
 
-Storybook is deliberately **empty**. There are no `.stories.tsx` files, examples, demos, or addons. Before the first story is added, Storybook may display its standard empty-state notice.
+Open `http://localhost:6006`. Three interactive stories are grouped under **NAMI**; use their own tabs and controls inside the preview. All assets are served by Storybook from `public/` using `staticDirs`.
 
-## Building the package
+## Package build
 
 ```bash
 npm run typecheck
 npm run build
 ```
 
-Outputs in `dist/`:
+The package build writes the ESM component library and Linaria CSS to `dist/`, plus copies the standalone demo HTML documents to `dist/nami-widgets/`. React/React DOM remain peer dependencies. The iframe content has its own styles and scripts, isolated from the AGICODE site and Storybook.
 
-- `index.js` — ES module
-- `index.d.ts` — TypeScript declarations
-- `style.css` — extracted Linaria styles
+### Use on the AGICODE Next.js site
 
-`src/WidgetRoot.tsx` is just a neutral typed container using Linaria to prove the CSS pipeline is connected. **It is not an implementation of the NAMI case.**
-
-## Using from the AGICODE site
-
-After making the package available to the AGICODE Next.js project (for example, as a built tarball or internal Git dependency), import its CSS once from the Next.js app's global entry point:
+The HTML files **must be served** from the website's public directory. Copy the built `dist/nami-widgets/` folder into the Next.js site's `public/nami-widgets/` (and keep it in sync with package updates); don't import raw HTML files into React or ship them as strings in the JS bundle.
 
 ```tsx
+import { OrdersWidget, TelegramWidget, MailAutomationWidget } from '@agicode/nami-case-widgets';
 import '@agicode/nami-case-widgets/style.css';
-```
 
-Then render the component from a client boundary or a server component as appropriate:
-
-```tsx
-import { WidgetRoot } from '@agicode/nami-case-widgets';
-
-export function CaseWidget() {
-  return <WidgetRoot>{/* Future NAMI content */}</WidgetRoot>;
+export function NamiExamples() {
+  return (
+    <>
+      <OrdersWidget />
+      <TelegramWidget />
+      <MailAutomationWidget />
+    </>
+  );
 }
 ```
 
-React and React DOM are peer dependencies to avoid shipping a second copy of React into AGICODE. The library is not independently hosted, and no iframe or standalone website is configured.
+The default `assetBasePath` is `/nami-widgets`. Override it per component if the static files live under a different URL prefix. `NamiDemoFrame` is also exported for advanced use.
 
-## Structure
+## Security and maintenance
 
-```text
-.storybook/main.ts      Storybook configuration (no stories yet)
-src/WidgetRoot.tsx     Linaria-based neutral wrapper
-src/index.ts           Public package exports
-vite.config.ts         Vite plugin setup for Storybook
-vite.lib.config.ts     Separate library build configuration
-tsconfig.json          Type checking
-tsconfig.build.json    Declaration generation
-```
+Each demo runs in an iframe with `sandbox="allow-scripts allow-forms allow-downloads"`, **without** `allow-same-origin`. Messages affecting iframe height are validated against the exact frame window, expected message type and finite numeric value. The original NAMI ordering demo also receives viewport updates needed for its internal layout. The assets are intentionally treated as immutable snapshots; future improvements should be made from the original app source, if available.
 
-When actual widgets appear, add stories named `src/**/*.stories.tsx`. Keep the Storybook configuration and component source in the same repository.
+The original order-management demo already declares a restrictive CSP including `connect-src 'none'`. For the other two standalone static demos, preserve appropriate site-level CSP and do not add dynamic external service calls.
