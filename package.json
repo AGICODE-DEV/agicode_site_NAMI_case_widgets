@@ -1,0 +1,54 @@
+{
+  "name": "@agicode/nami-case-widgets",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "React widgets for the AGICODE NAMI case",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "npm run typecheck && vite build --config vite.lib.config.ts && tsc --project tsconfig.build.json",
+    "storybook": "storybook dev --port 6006 --no-open",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@linaria/core": "^8.2.0",
+    "@linaria/react": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@storybook/react-vite": "^10.6.5",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "@wyw-in-js/vite": "^2.7.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "storybook": "^10.6.5",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5"
+  }
+}
