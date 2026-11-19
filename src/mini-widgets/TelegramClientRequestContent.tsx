@@ -1,3 +1,4 @@
+import { imageProps } from "../shared/imageProps";
 import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
 import type { ContentProps } from "../shared/WidgetParts";
 
@@ -22,10 +23,7 @@ export function TelegramClientRequestContent({ assetBasePath }: ContentProps) {
           <a>{"https://example.invalid/products/shampoo"}</a>
           <div className="item">
             <img
-              src={
-                assetBasePath.replace(/\/$/, "") +
-                "/images/03c8c086a22c7e6d.jpg"
-              }
+              {...imageProps(assetBasePath, "images/03c8c086a22c7e6d.jpg")}
               alt="Daily Care Gentle Shampoo, 500 ml"
               style={{
                 width: "44px",

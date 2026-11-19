@@ -1,3 +1,4 @@
+import { imageProps } from "../shared/imageProps";
 import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
 import type { ContentProps } from "../shared/WidgetParts";
 
@@ -11,9 +12,7 @@ export function TelegramUpdatedOrderContent({ assetBasePath }: ContentProps) {
       <div className="real-shots">
         <div className="real-shot">
           <img
-            src={
-              assetBasePath.replace(/\/$/, "") + "/images/bd4a05a6c8c22f25.png"
-            }
+            {...imageProps(assetBasePath, "images/bd4a05a6c8c22f25.png")}
             alt="Реальный интерфейс демоверсии NAMI — N7"
           />
         </div>

@@ -1,3 +1,4 @@
+import { imageProps } from "../shared/imageProps";
 import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
 import type { ContentProps } from "../shared/WidgetParts";
 
@@ -15,10 +16,7 @@ export function TelegramStatusAnswerContent({ assetBasePath }: ContentProps) {
           <div className="message outgoing">
             <img
               className="client-question-shot"
-              src={
-                assetBasePath.replace(/\/$/, "") +
-                "/images/64cbe098c6a56c64.png"
-              }
+              {...imageProps(assetBasePath, "images/64cbe098c6a56c64.png")}
               alt="Скриншот переписки с Никитой Речным"
             />
             <span className="time">{"12:41 ✓✓"}</span>

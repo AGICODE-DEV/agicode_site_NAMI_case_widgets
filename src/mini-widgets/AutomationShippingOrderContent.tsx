@@ -1,3 +1,4 @@
+import { imageProps } from "../shared/imageProps";
 import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
 import type { ContentProps } from "../shared/WidgetParts";
 
@@ -11,9 +12,7 @@ export function AutomationShippingOrderContent({
       <div className="real-shots">
         <div className="real-shot">
           <img
-            src={
-              assetBasePath.replace(/\/$/, "") + "/images/24c52236e01a9919.png"
-            }
+            {...imageProps(assetBasePath, "images/24c52236e01a9919.png")}
             alt="Реальный интерфейс демоверсии NAMI — N6"
           />
         </div>

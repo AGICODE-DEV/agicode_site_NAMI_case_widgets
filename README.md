@@ -35,7 +35,8 @@ import '@agicode/nami-case-widgets/style.css';
 export function NamiExamples() {
   return (
     <>
-      <OrdersWidget />    </>
+      <OrdersWidget />
+    </>
   );
 }
 ```
@@ -93,3 +94,8 @@ import { TelegramCreatedOrderWidget, AutomationShippingEmailWidget } from '@agic
 <TelegramCreatedOrderWidget />
 <AutomationShippingEmailWidget assetBasePath="/nami-widgets" />
 ```
+
+
+## Browser image delivery
+
+The media build converts document and interface PNGs losslessly when smaller and supplies 52, 104 and 156 px product thumbnails. The original images remain available for detail views and downloads. The standalone orders page is generated from `src/demo/orders.html`. Run `npm run media:build` before serving static files directly. The normal widget, Storybook and package builds prepare the media automatically.

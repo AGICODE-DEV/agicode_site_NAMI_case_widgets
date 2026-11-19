@@ -6,6 +6,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [wyw(), react()],
   build: {
+    copyPublicDir: false,
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
       formats: ['es'],

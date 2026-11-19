@@ -1,3 +1,4 @@
+import { imageProps } from "../shared/imageProps";
 import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
 import type { ContentProps } from "../shared/WidgetParts";
 
@@ -48,10 +49,7 @@ export function AutomationWarehouseEmailContent({
           <p>{"Покупка DEMO-21 принята складом Японии."}</p>
           <div className="item">
             <img
-              src={
-                assetBasePath.replace(/\/$/, "") +
-                "/images/ff9fd69408823c92.jpg"
-              }
+              {...imageProps(assetBasePath, "images/ff9fd69408823c92.jpg")}
               alt="Women's Linen Shirt, Size M"
               style={{
                 width: "44px",

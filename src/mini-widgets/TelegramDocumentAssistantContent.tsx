@@ -1,3 +1,4 @@
+import { imageProps } from "../shared/imageProps";
 import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
 import type { ContentProps } from "../shared/WidgetParts";
 
@@ -17,9 +18,7 @@ export function TelegramDocumentAssistantContent({
         <div className="message outgoing">
           <img
             className="tax-notice-photo"
-            src={
-              assetBasePath.replace(/\/$/, "") + "/images/20e4afb208b0696a.png"
-            }
+            {...imageProps(assetBasePath, "images/20e4afb208b0696a.png")}
             alt="Фото бумажного извещения на столе: DEMO-THAILAND-101, 20 USD"
           />
           <span className="time">{"12:41 ✓✓"}</span>

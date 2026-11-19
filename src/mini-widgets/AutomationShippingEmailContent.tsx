@@ -1,3 +1,4 @@
+import { imageProps } from "../shared/imageProps";
 import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
 import type { ContentProps } from "../shared/WidgetParts";
 
@@ -52,10 +53,7 @@ export function AutomationShippingEmailContent({
           </p>
           <div className="item">
             <img
-              src={
-                assetBasePath.replace(/\/$/, "") +
-                "/images/0a6240dad3b265f5.jpg"
-              }
+              {...imageProps(assetBasePath, "images/0a6240dad3b265f5.jpg")}
               alt="2.4 m Spinning Rod & Reel Set"
               style={{
                 width: "44px",

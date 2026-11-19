@@ -3,3 +3,6 @@ dist/
 storybook-static/
 *.tsbuildinfo
 .DS_Store
+
+/public/nami-widgets/media/
+/public/nami-widgets/orders.html

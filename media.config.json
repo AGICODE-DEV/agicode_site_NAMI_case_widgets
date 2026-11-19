@@ -1,0 +1,32 @@
+{
+  "roots": [
+    "public",
+    "src"
+  ],
+  "base": "public/nami-widgets",
+  "output": "public/nami-widgets/media",
+  "publish": {
+    "from": "public/nami-widgets",
+    "to": "dist/nami-widgets"
+  },
+  "groups": [
+    {
+      "files": "public/nami-widgets/images/*.png",
+      "type": "lossless"
+    },
+    {
+      "files": "public/nami-widgets/images/*.{jpg,jpeg}",
+      "type": "thumbnail",
+      "widths": [
+        52,
+        104,
+        156
+      ]
+    },
+    {
+      "files": "public/nami-widgets/images/e6d8202f305842f0.svg",
+      "type": "retain",
+      "reason": "Small repeating chat background shared by the mini-widgets."
+    }
+  ]
+}

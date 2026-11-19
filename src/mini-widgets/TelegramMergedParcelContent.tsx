@@ -1,3 +1,4 @@
+import { imageProps } from "../shared/imageProps";
 import { ChatHeader, Composer, SiteHeader } from "../shared/WidgetParts";
 import type { ContentProps } from "../shared/WidgetParts";
 
@@ -9,9 +10,7 @@ export function TelegramMergedParcelContent({ assetBasePath }: ContentProps) {
       <div className="real-shots">
         <div className="real-shot">
           <img
-            src={
-              assetBasePath.replace(/\/$/, "") + "/images/91b835432a883d0e.png"
-            }
+            {...imageProps(assetBasePath, "images/91b835432a883d0e.png")}
             alt="Реальный интерфейс демоверсии NAMI — combined"
           />
         </div>
