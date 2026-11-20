@@ -89,3 +89,5 @@ The business-systems page previously fetched the entire frame before the first s
 The owner approved the locally reviewed candidate for production on 20 November 2026. The consuming site's release record tracks publication.
 
 The release-image accessibility check identified low-contrast secondary text and incomplete accessible names on order and product buttons. Patch 0.2.1 darkens the secondary text and derives the button names from their visible contents and action. Its archive is 2,384,429 bytes with SHA-256 `4b6d928bc2630db41631fb4b57be8d8b78ad0fb239e6016d899a5dc2ae104430`.
+
+The mobile workflow check caught a 15 px page overflow after the board mounted at a 390 px viewport. Version 0.2.2 positions the accessible action text within each order card. The final archive is 2,384,443 bytes with SHA-256 `d65a64100215979d8eba76ffa56258deaca8b00eab7e34f94396708c5b127b78`.

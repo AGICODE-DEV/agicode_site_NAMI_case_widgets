@@ -33,7 +33,7 @@ button svg, .product svg { flex: none; vertical-align: middle; }
 .card-list { display:grid; grid-template-columns:minmax(0,1fr); gap:14px; }
 .empty, .new-in-lane { display:flex; align-items:center; justify-content:center; gap:6px; min-height:44px; width:100%; border:1px dashed #cbd8e8; border-radius:8px; background:#fbfcfe; color:var(--nami-text-muted); font-size:13px; }
 .empty { min-height:208px; background:transparent; }
-.order-card { min-width:0; background:white; border:1px solid #dfe6f0; border-radius:8px; box-shadow:0 2px 3px #20355108; }
+.order-card { position:relative; min-width:0; background:white; border:1px solid #dfe6f0; border-radius:8px; box-shadow:0 2px 3px #20355108; }
 .card-head { display:flex; gap:5px; align-items:center; padding:8px 13px 0; }
 .client-name, .card-info, .icon-button { background:none; border:0; padding:0; }
 .client-name { font-size:16px; font-weight:700; text-align:left; }
