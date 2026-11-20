@@ -7,12 +7,12 @@ export function ProductSummary({ item, base, onOpen, expanded = false }: {
   item: Product; base: string; onOpen?: () => void; expanded?: boolean;
 }) {
   const inside = <>
-    {item.image && <img width={expanded ? 72 : 52} height={expanded ? 72 : 52} {...thumbnail(base, item.image)} alt={item.name}/>}
+    {item.image && <img width={expanded ? 72 : 52} height={expanded ? 72 : 52} {...thumbnail(base, item.image)} alt=""/>}
     <span className="product-lines"><span className="product-line"><strong>{item.name || 'Товар'}</strong>{!expanded && <span>— {item.quantity} шт</span>}</span>
       {expanded ? <><span>{item.quantity} шт. · {money(item.cost * item.quantity)}</span><span className="description">{item.description}</span></> :
         <>{item.url && <span className="product-line"><span className="ellipsis">{item.url}</span><Icon name="open"/></span>}<small>{money(item.cost * item.quantity)}</small></>}
     </span></>;
-  return onOpen ? <button className="product" type="button" onClick={onOpen} aria-label={'Открыть товар ' + item.name}>{inside}</button> : <div className="product">{inside}</div>;
+  return onOpen ? <button className="product" type="button" onClick={onOpen}><span className="sr-only">Открыть товар </span>{inside}</button> : <div className="product">{inside}</div>;
 }
 
 export function OrderCard({ order, state, base, onEdit, onCustomer, onProduct, onNext, onBack }: {
@@ -27,7 +27,8 @@ export function OrderCard({ order, state, base, onEdit, onCustomer, onProduct, o
       {channel !== 'other' && <span className={'channel ' + channel} title={channels[channel]} aria-label={channels[channel]}>{channel === 'telegram' ? '➤' : channel === 'vk' ? 'ᴠκ' : '●'}</span>}
       <button className="contact" type="button" aria-label={'Данные клиента ' + customerName(client)} onClick={onCustomer}><Icon name="link"/></button>
     </div>
-    <button className="card-info" type="button" onClick={onEdit} aria-label={'Открыть ' + order.id}>
+    <button className="card-info" type="button" onClick={onEdit}>
+      <span className="sr-only">Открыть {order.id} </span>
       {order.group && <strong>Объединённая посылка · {order.group.members.length}</strong>}
       <span>{client.name || client.city || client.address || 'Данные доставки не указаны'}</span>
       <small>Дата заказа: {order.date.split('-').reverse().join('.')}</small>

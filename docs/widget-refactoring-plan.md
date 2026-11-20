@@ -87,3 +87,5 @@ In five alternating cold Chromium runs per version on the mobile case page, the 
 The business-systems page previously fetched the entire frame before the first scroll. Deferral removes that request and changes the mobile median wait at the board from 81 ms to 606 ms. The mobile case-page LCP measured 2,280 ms before and 2,384 ms after, and filtering measured 29 ms and 47 ms respectively. Initial case-page CLS measured 0.0013 in both versions. These laboratory samples cover the local builds and the stated viewport, network and CPU profile.
 
 The owner approved the locally reviewed candidate for production on 20 November 2026. The consuming site's release record tracks publication.
+
+The release-image accessibility check identified low-contrast secondary text and incomplete accessible names on order and product buttons. Patch 0.2.1 darkens the secondary text and derives the button names from their visible contents and action. Its archive is 2,384,429 bytes with SHA-256 `4b6d928bc2630db41631fb4b57be8d8b78ad0fb239e6016d899a5dc2ae104430`.
