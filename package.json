@@ -1,6 +1,6 @@
 {
   "name": "@agicode/nami-case-widgets",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "React widgets for the AGICODE NAMI case",
@@ -21,19 +21,36 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/style.css",
+    "./orders": {
+      "types": "./dist/orders.d.ts",
+      "import": "./dist/orders.js"
+    },
+    "./mini": {
+      "types": "./dist/mini.d.ts",
+      "import": "./dist/mini.js"
+    },
+    "./mini/document": {
+      "types": "./dist/mini/document.d.ts",
+      "import": "./dist/mini/document.js"
+    },
+    "./mini/status": {
+      "types": "./dist/mini/status.d.ts",
+      "import": "./dist/mini/status.js"
+    }
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "build": "npm run typecheck && vite build --config vite.lib.config.ts && tsc --project tsconfig.build.json && node scripts/copy-demo-assets.mjs",
+    "build": "npm run typecheck && vite build --config vite.lib.config.ts && tsc --project tsconfig.build.json && npm run build:standalone && node scripts/copy-demo-assets.mjs",
     "storybook": "storybook dev --port 6006 --no-open",
     "build-storybook": "storybook build",
-    "media:build": "agicode-media build && node scripts/build-orders-page.mjs",
-    "media:check": "agicode-media check && node scripts/build-orders-page.mjs --check",
+    "media:build": "agicode-media build",
+    "media:check": "agicode-media check",
     "pretypecheck": "npm run media:build",
-    "prestorybook": "npm run media:build",
-    "prebuild-storybook": "npm run media:build",
-    "prepack": "npm run build && npm run media:check"
+    "prestorybook": "npm run media:build && npm run build:standalone",
+    "prebuild-storybook": "npm run media:build && npm run build:standalone",
+    "prepack": "npm run build && npm run media:check",
+    "build:standalone": "node scripts/build-standalone.mjs"
   },
   "peerDependencies": {
     "react": "^19.0.0",

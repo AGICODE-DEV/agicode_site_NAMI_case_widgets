@@ -32,7 +32,7 @@ const Frame = styled.iframe`
 `;
 
 export interface NamiWidgetProps {
-  /** URL prefix containing the orders demo HTML file. */
+  /** URL prefix for the demo's browser assets and standalone document. */
   assetBasePath?: string;
   className?: string;
   style?: CSSProperties;
@@ -42,10 +42,7 @@ interface NamiDemoFrameProps extends NamiWidgetProps {
   demo: DemoId;
 }
 
-/**
- * The supplied case embeds self-contained, already-built browser demos.
- * Keep them intact in sandboxed frames to preserve their interactions.
- */
+/** Explicit standalone document adapter for existing iframe consumers. */
 export function NamiDemoFrame({
   demo,
   assetBasePath = '/nami-widgets',
@@ -132,9 +129,5 @@ export function NamiDemoFrame({
       referrerPolicy="no-referrer"
     />
   );
-}
-
-export function OrdersWidget(props: NamiWidgetProps) {
-  return <NamiDemoFrame demo="orders" {...props} />;
 }
 

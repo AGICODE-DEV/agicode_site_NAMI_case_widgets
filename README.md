@@ -1,6 +1,6 @@
 # AGICODE — NAMI Case Widgets
 
-The package includes `OrdersWidget`, an illustrative order-management demo, and 21 standalone React mini-widgets for Telegram and email automation scenarios. The full orders demo uses the original HTML in a sandboxed iframe; the mini-widgets render directly in React with Linaria styles.
+The package includes `OrdersWidget`, an illustrative order-management demo, and 21 standalone React mini-widgets for Telegram and email automation scenarios. The native board uses the host's React and React DOM through peer dependencies. Its open shadow root isolates the NAMI interface and dialogs. Mini-widgets use Linaria styles.
 
 No actual NAMI back end, customer data or external API credentials are included; the source demos are illustrative. We did not add network access to them.
 
@@ -22,15 +22,14 @@ npm run typecheck
 npm run build
 ```
 
-The package build writes the ESM component library and Linaria CSS to `dist/`, plus copies the orders demo and images to `dist/nami-widgets/`. React/React DOM remain peer dependencies. The iframe content has its own styles and scripts, isolated from the AGICODE site and Storybook. Images are stored separately in `nami-widgets/images/` and are copied with the HTML files.
+The build writes ESM and declarations for the root, orders and mini entries, the mini-widget stylesheet and the static distribution under dist/nami-widgets/.
 
 ### Use on the AGICODE Next.js site
 
-The orders HTML file and images **must be served** from the website's public directory. Copy the built `dist/nami-widgets/` folder into the Next.js site's `public/nami-widgets/` (and keep it in sync with package updates); don't import raw HTML files into React or ship them as strings in the JS bundle.
+Copy the package's dist/nami-widgets/ directory to the corresponding public asset prefix. The site loads the orders entry when its preview enters the viewport.
 
 ```tsx
-import { OrdersWidget } from '@agicode/nami-case-widgets';
-import '@agicode/nami-case-widgets/style.css';
+import { OrdersWidget } from '@agicode/nami-case-widgets/orders';
 
 export function NamiExamples() {
   return (
@@ -45,15 +44,13 @@ The default `assetBasePath` is `/nami-widgets`. Override it per component if the
 
 ## Security and maintenance
 
-The orders demo runs in an iframe with `sandbox="allow-scripts allow-forms allow-downloads"`, **without** `allow-same-origin`. Messages affecting iframe height are validated against the exact frame window, expected message type and finite numeric value. The orders demo also receives viewport updates needed for its internal layout. Mini-widgets render directly in the host document without iframe or messaging.
-
-The order-management demo declares a restrictive CSP including `connect-src 'none'`.
+In version 0.2, OrdersWidget renders a native element with natural height. Existing className, style and assetBasePath props belong to this root. The explicit NamiDemoFrame adapter retains its sandboxed iframe, height messages and standalone orders.html URL. Both render the same typed board. The standalone bundles its renderer and enforces a content security policy with a script hash and connect-src 'none'. Order edits, photos, customer details and link previews stay within the mounted demo.
 ## Standalone mini-widgets
 
 Each of the 21 blocks from the Telegram and mail automation scenarios can also be embedded on its own. Scenarios and steps are numbered from 1: Telegram has scenarios 1–4, automation 1–3; each has steps 1–3.
 
 ```tsx
-import { NamiMiniWidget } from '@agicode/nami-case-widgets';
+import { NamiMiniWidget } from '@agicode/nami-case-widgets/mini';
 import '@agicode/nami-case-widgets/style.css';
 
 <NamiMiniWidget demo="telegram" scenario={1} step={3} />
@@ -61,6 +58,8 @@ import '@agicode/nami-case-widgets/style.css';
 ```
 
 The component uses the same `assetBasePath` convention as the full demos; deploy `dist/nami-widgets/images/` to the matching asset path. Storybook's **NAMI/04 · Мини-виджеты** shows a single configurable block and a gallery of all blocks. The blocks preserve the source presentation: images of NAMI cards remain screenshots, and the illustrated chat and mail content is not connected to external services.
+
+The mini/document and mini/status entries each expose the three named examples used by the site's document-recognition and AI-employee routes. A route can load one scenario independently of the complete selector.
 
 Each block also has its own component. All accept `assetBasePath`, `className`, and `style`; shared layout components and scoped styles use Linaria. NAMI order-card screenshots remain images.
 
@@ -89,7 +88,7 @@ Each block also has its own component. All accept `assetBasePath`, `className`, 
 | Автоматизация 3 | Уведомление владельцу | `AutomationChangesNotificationWidget` |
 
 ```tsx
-import { TelegramCreatedOrderWidget, AutomationShippingEmailWidget } from '@agicode/nami-case-widgets';
+import { TelegramCreatedOrderWidget, AutomationShippingEmailWidget } from '@agicode/nami-case-widgets/mini';
 
 <TelegramCreatedOrderWidget />
 <AutomationShippingEmailWidget assetBasePath="/nami-widgets" />
@@ -98,4 +97,4 @@ import { TelegramCreatedOrderWidget, AutomationShippingEmailWidget } from '@agic
 
 ## Browser image delivery
 
-The media build converts document and interface PNGs losslessly when smaller and supplies 52, 104 and 156 px product thumbnails. The original images remain available for detail views and downloads. The standalone orders page is generated from `src/demo/orders.html`. Run `npm run media:build` before serving static files directly. The normal widget, Storybook and package builds prepare the media automatically.
+The media build converts document and interface PNGs losslessly when smaller and supplies 52, 104 and 156 px product thumbnails. The original images remain available for detail views and downloads. The standalone orders document is generated from the readable HTML shell and the native React entry in src/demo/. Run npm run media:build followed by npm run build:standalone before serving static files directly. The normal widget, Storybook and package builds prepare the media automatically.

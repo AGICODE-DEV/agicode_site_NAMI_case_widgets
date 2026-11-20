@@ -28,7 +28,7 @@ export interface NamiMiniWidgetProps extends MiniWidgetProps {
   step: 1 | 2 | 3;
 }
 
-const blocks = {
+export const scenarioWidgets = {
   "telegram-1-1": TelegramClientRequestWidget,
   "telegram-1-2": TelegramOrderAssistantWidget,
   "telegram-1-3": TelegramCreatedOrderWidget,
@@ -59,7 +59,7 @@ export function NamiMiniWidget({
   ...props
 }: NamiMiniWidgetProps) {
   const Component =
-    blocks[`${demo}-${scenario}-${step}` as keyof typeof blocks];
+    scenarioWidgets[`${demo}-${scenario}-${step}` as keyof typeof scenarioWidgets];
   if (!Component) throw new RangeError("Мини-виджет не найден");
   return <Component {...props} />;
 }

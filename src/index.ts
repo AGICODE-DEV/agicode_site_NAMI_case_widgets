@@ -1,8 +1,5 @@
+'use client';
 export { WidgetRoot } from './WidgetRoot';
-export { OrdersWidget, NamiDemoFrame } from './NamiDemoFrame';
-export type { NamiWidgetProps } from './NamiDemoFrame';
-
-export { NamiMiniWidget } from './NamiMiniWidget';
-export type { NamiMiniWidgetProps } from './NamiMiniWidget';
-export * from './mini-widgets';
-export type { MiniWidgetProps } from './NamiMiniWidget';
+export { NamiDemoFrame } from './NamiDemoFrame';
+export * from './orders';
+export * from './mini';
